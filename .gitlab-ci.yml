@@ -6,7 +6,7 @@ services:
 variables:
   POSTGRES_DB: Help_desk
   POSTGRES_USER: root
-  POSTGRES_PASSWORD: "root" 
+  POSTGRES_PASSWORD: "root"
   POSTGRES_HOST: postgres
 
 before_script:
@@ -19,8 +19,8 @@ stages:
 
 build:
   stage: build
-  artifacts:
-    paths:
-    - /builds/dziana/MyHelpDesk/web/target/web.war
+#  artifacts:
+#    paths:
+#    - /builds/dziana/MyHelpDesk/web/target/web.war
   script:
   - mvn package
