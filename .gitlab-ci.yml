@@ -1,0 +1,26 @@
+image: maven:3.5-jdk-8
+
+services:
+- postgres:latest
+
+variables:
+  POSTGRES_DB: Help_desk
+  POSTGRES_USER: root
+  POSTGRES_PASSWORD: "root" 
+  POSTGRES_HOST: postgres
+
+before_script:
+# Install PG client & import schema info
+- apt-get update && apt-get install -y postgresql-client libpq-dev
+- PGPASSWORD=$POSTGRES_PASSWORD psql -U $POSTGRES_USER -h $POSTGRES_HOST -d $POSTGRES_DB -f db_Postgres.sql
+
+stages:
+- build
+
+build:
+  stage: build
+  artifacts:
+    paths:
+    - /builds/dziana/MyHelpDesk/web/target/web.war
+  script:
+  - mvn package
