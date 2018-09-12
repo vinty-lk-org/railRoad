@@ -1,6 +1,7 @@
 package by.lk.services;
 
 import by.lk.dto.TaskDto;
+import by.lk.entity.Status;
 import by.lk.entity.SystemUser;
 import by.lk.entity.Task;
 import by.lk.repository.TaskRepository;
@@ -35,6 +36,7 @@ public class TaskServiceImpl implements TaskService {
     task.setName(taskDto.getName());
     task.setText(taskDto.getText());
     task.setSystemUser(systemUser);
+    task.setStatus(new Status(1L));
     Task saveId = taskRepository.save(task);
     return saveId.getId();
   }

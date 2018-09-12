@@ -47,8 +47,8 @@ public class TaskServiceTest extends CommonTest {
 //        taskDtoList.add(taskDto);
 //        taskDtoList.add(taskDto2);
 
-        List<TaskDto> taskDtoListFromDb = taskService.findAll();
-        System.out.println(taskDtoListFromDb);
+//        List<TaskDto> taskDtoListFromDb = taskService.findAll();
+//        System.out.println(taskDtoListFromDb);
 //        taskRepository.delete(id2);
     }
 }
