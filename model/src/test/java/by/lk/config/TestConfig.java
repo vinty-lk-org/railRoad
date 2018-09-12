@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = {"by.lk"})
 @EnableTransactionManagement
-@PropertySource("classpath:database.properties")
+@PropertySource("classpath:databaseTest.properties")
 public class TestConfig {
 
     @Value("${jdbc.url}")
