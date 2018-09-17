@@ -76,4 +76,9 @@ public class TaskServiceImpl implements TaskService {
             ))
             .collect(Collectors.toList()));
   }
+
+  @Override
+  public void delete(Long id) {
+    taskRepository.delete(id);
+  }
 }

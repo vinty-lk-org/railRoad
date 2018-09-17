@@ -14,4 +14,6 @@ public interface TaskService {
     Task findById(Long id);
 
     List<TaskDto> findBySystemUserId(Long id);
+
+    void delete(Long id);
 }
