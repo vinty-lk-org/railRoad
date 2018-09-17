@@ -12,47 +12,46 @@
     <!--}-->
     <!--</style>-->
     <link rel="stylesheet" th:href="@{/resources/css/foundation.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/app.css}">
     <!--<link rel="stylesheet" href="../resources/css/app.css">-->
 </head>
 <body>
-<div class="vinty-border-radius">
-    <div class="grid-container">
-        <div class="row">
-            <div class="medium-3 columns">
-            </div>
-            <div class="medium-6 columns">
-                <h1 th:text="#{login.auth}">Авторизация пользователя</h1>
+<div class="grid-container">
+    <div class="row">
+        <div class="medium-3 columns">
+        </div>
+        <div class="medium-6 columns">
+            <h1 th:text="#{login.auth}">Авторизация пользователя</h1>
 
-                <!--<div class="switch small">-->
-                <!--<input class="switch-input" id="smallSwitch" type="checkbox" name="exampleSwitch">-->
-                <!--<label class="switch-paddle" for="smallSwitch">-->
-                <!--<span class="show-for-sr">Small Portions Only</span>-->
-                <!--</label><br>-->
-                <!--</div>-->
+            <!--<div class="switch small">-->
+            <!--<input class="switch-input" id="smallSwitch" type="checkbox" name="exampleSwitch">-->
+            <!--<label class="switch-paddle" for="smallSwitch">-->
+            <!--<span class="show-for-sr">Small Portions Only</span>-->
+            <!--</label><br>-->
+            <!--</div>-->
+            <br>
+            <!--<h4 th:text="#{login.enter_login}"> Enter Login and Password </h4>-->
+
+            <form th:action="@{/login}" method="post">
+                <label for="username" th:text="#{email_you_login.emaillogin}"><strong>E-mail: </strong></label>
+                <input type="text" name="username" id="username" required="required">
+                <label for="password" th:text="#{login.password}"><strong>E-mail: </strong></label>
+                <input type="password" name="password" id="password" required="required"><br>
+                <button type="submit" class="primary vinty expanded button" th:text="#{login.enter}">Enter</button>
                 <br>
-                <!--<h4 th:text="#{login.enter_login}"> Enter Login and Password </h4>-->
-
-                <form th:action="@{/login}" method="post">
-                    <label for="username" th:text="#{email_you_login.emaillogin}"><strong>E-mail: </strong></label>
-                    <input type="text" name="username" id="username" required="required">
-                    <label for="password" th:text="#{login.password}"><strong>E-mail: </strong></label>
-                    <input type="password" name="password" id="password" required="required"><br>
-                    <button type="submit" class="success expanded button" th:text="#{login.enter}">Enter</button>
-                    <br>
-                </form>
-                <a class="hollow expanded secondary button" href="/registration" th:text="#{login.registration}">Registration}</a>
-            </div>
-            <div class="medium-3 columns">
-                <a href="?language=ru_RU">На русском языке/</a> <a href="?language=en_US">
-                in English</a>
-            </div>
+            </form>
+            <a class="hollow expanded secondary button" href="/registration" th:text="#{login.registration}">Registration}</a>
+        </div>
+        <div class="medium-3 columns">
+            <a href="?language=ru_RU">На русском языке/</a> <a href="?language=en_US">
+            in English</a>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
 </div>
+<br>
+<br>
+<br>
+<br>
 <script src="/resources/js/vendor/jquery.js"></script>
 <script src="/resources/js/vendor/what-input.js"></script>
 <script src="/resources/js/vendor/foundation.js"></script>

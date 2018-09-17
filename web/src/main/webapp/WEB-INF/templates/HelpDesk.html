@@ -38,7 +38,7 @@
                 <!--</div>-->
                 <form id="1" th:action="@{/HelpDesk}" method="post" th:object="${taskDto}">
                     <label for="textArea" th:text="#{HD.textArea}"></label>
-                    <textarea id="textArea" rows="7" type="text" th:field="*{text}" th:placeholder="#{HD.text}"
+                    <textarea id="textArea" rows="4" type="text" th:field="*{text}" th:placeholder="#{HD.text}"
                               required="required"></textarea>
                     <label for="listeners" th:text="#{listener.chose}"> </label>
                     <select id="listeners">
@@ -53,7 +53,7 @@
                     <!--th:text="${privilege.getNamePrivilege()}">-->
                     <!--</option>-->
                     <!--</select><br>-->
-                    <button type="submit" th:text="#{HD.submit}" class="success vinty expanded button">Зарегистрировать
+                    <button type="submit" th:text="#{HD.submit}" class="primary vinty expanded button">Зарегистрировать
                     </button>
                 </form>
                 <h2 align="center" th:text="#{HD.self}">Свои заявки</h2>
