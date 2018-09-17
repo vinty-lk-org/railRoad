@@ -23,11 +23,15 @@
       <artifactId>hibernate-core</artifactId>
       <version>5.2.10.Final</version>
     </dependency>
-
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
       <version>5.4.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>4.2.7.SP1</version>
     </dependency>
 
     <dependency>
@@ -53,11 +57,6 @@
       <artifactId>h2</artifactId>
       <version>1.4.195</version>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>org.postgresql</groupId>-->
-      <!--<artifactId>postgresql</artifactId>-->
-      <!--<version>42.1.1.jre7</version>-->
-    <!--</dependency>-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
@@ -68,5 +67,12 @@
       <artifactId>postgresql</artifactId>
       <version>42.2.2</version>
     </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>com.oracle</groupId>-->
+      <!--<artifactId>ora-jdbc</artifactId>-->
+      <!--<version>7</version>-->
+    <!--</dependency>-->
+
   </dependencies>
 </project>

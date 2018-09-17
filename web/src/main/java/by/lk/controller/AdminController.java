@@ -18,29 +18,29 @@ import java.util.Collection;
  */
 @Controller
 public class AdminController {
-    private final UserService userService;
+  private final UserService userService;
 
-    @Autowired
-    public AdminController(UserService userService) {
-        this.userService = userService;
-    }
+  @Autowired
+  public AdminController(UserService userService) {
+    this.userService = userService;
+  }
 
-    @ModelAttribute("systemUsers")
-    public SystemUser systemUser() {
-        return new SystemUser();
-    }
+  @ModelAttribute("systemUsers")
+  public SystemUser systemUser() {
+    return new SystemUser();
+  }
 
-    @GetMapping(path = "/Admin")
-    public String showHelpDesk(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String systemUserEmail = user.getUsername();
-        Collection<GrantedAuthority> priveleges = user.getAuthorities();
-        if (priveleges.iterator().hasNext()) {
-            model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());
-        }
-        model.addAttribute("systemUsername", systemUserEmail);
-        return "Admin";
+  @GetMapping(path = "/Admin")
+  public String showHelpDesk(Model model) {
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String systemUserEmail = user.getUsername();
+    Collection<GrantedAuthority> priveleges = user.getAuthorities();
+    if (priveleges.iterator().hasNext()) {
+      model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());
     }
+    model.addAttribute("systemUsername", systemUserEmail);
+    return "Admin";
+  }
 
 //    @PostMapping(path = "/HelpDesk")
 //    public String taskDto(TaskDto taskDtoFromView, Model model, HttpSession httpSession) {

@@ -12,6 +12,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -52,6 +54,7 @@ public class RootConfig {
 
     @Bean
     public DriverManagerDataSource dataSource() {
+//        Locale.setDefault(Locale.ENGLISH);
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(dbUrl);
         dataSource.setDriverClassName(driver);
@@ -59,6 +62,16 @@ public class RootConfig {
         dataSource.setPassword(password);
         return dataSource;
     }
+        // ORACLE
+//    @Bean
+//    public DataSource dataSource() {
+//        DriverManagerDataSource ds = new DriverManagerDataSource();
+//        ds.setDriverClassName(oracle.jdbc.driver.OracleDriver.class.getName());
+//        ds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+//        ds.setUsername("help_desk");
+//        ds.setPassword("avtolik");
+//        return ds;
+//    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {

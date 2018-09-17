@@ -43,7 +43,6 @@ public class TaskServiceImpl implements TaskService {
 
   @Override
   public List<TaskDto> findAll() {
-//        List<Task> taskList = new ArrayList<>();
     List<Task> taskList = (List<Task>) taskRepository.findAll();
 //        while (all.iterator().hasNext()){
 //            taskList.add(all.iterator().next());

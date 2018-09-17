@@ -26,15 +26,19 @@
                     <p th:case="'User'">У вас права пользователя.</p>
                 </div>
                 <div th:if="${userAuthority.equals('Admin')}">
-                    <div>Ты админко!!!! Тока Тсссс....</div>
+                    <div>Ты Админ! С большой силой приходит большая ответственность.</div>
+                </div>
+                <div th:if="${userAuthority.equals('Operator')}">
+                    <div>Ты Оператор.</div>
                 </div>
 
                 <form id="1" th:action="@{/HelpDesk}" method="post" th:object="${taskDto}">
-                    <textarea rows="7" type="text" th:field="*{text}" th:placeholder="#{HD.text}" required="required"></textarea>
-                    <select th:field="*{typeOfJobId}">
-                        <option th:each="typeOfJob : ${typeOfJobs}"
-                                th:value="${typeOfJob.getId()}"
-                                th:text="${typeOfJob.getName()}">
+                    <textarea rows="7" type="text" th:field="*{text}" th:placeholder="#{HD.text}"
+                              required="required"></textarea>
+                    <select th:field="*{listener}">
+                        <option th:each="listener : ${listeners}"
+                                th:value="${listener.getId()}"
+                                th:text="${listener.getName()}">
                         </option>
                     </select><br>
                     <!--<select th:field="*{typeOfJobId}">-->

@@ -1,6 +1,5 @@
 package by.lk.configs;
 
-import by.lk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,49 +18,51 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ComponentScan("by.lk")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService userDetailsService;
+  private final UserDetailsService userDetailsService;
 
-    @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+  @Autowired
+  public SecurityConfig(UserDetailsService userDetailsService) {
+    this.userDetailsService = userDetailsService;
+  }
 
-    @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-        auth.authenticationProvider(authenticationProvider());
-    }
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/login", "/registration", "/resources/**", "/HelpDesk")
-                .permitAll()
-                .antMatchers("/admin").hasAuthority("Admin")
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/HelpDesk", true)
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
-                .and()
-                .csrf().disable();
+  @Autowired
+  public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService);
+    auth.authenticationProvider(authenticationProvider());
+  }
 
-        http.userDetailsService(userDetailsService);
-    }
+  @Bean
+  public DaoAuthenticationProvider authenticationProvider() {
+    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+    authenticationProvider.setUserDetailsService(userDetailsService);
+    authenticationProvider.setPasswordEncoder(passwordEncoder());
+    return authenticationProvider;
+  }
+
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()
+            .antMatchers("/login", "/registration", "/resources/**", "/HelpDesk")
+            .permitAll()
+            .antMatchers("/admin").hasAuthority("Admin")
+            .anyRequest()
+            .authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .loginProcessingUrl("/login")
+            .defaultSuccessUrl("/HelpDesk", true)
+            .and()
+            .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/login")
+            .and()
+            .csrf().disable();
+    http.userDetailsService(userDetailsService);
+  }
 }

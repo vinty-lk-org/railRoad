@@ -23,51 +23,52 @@ import java.util.List;
  */
 @Controller
 public class HelpDeskController {
-    private final TaskService taskService;
-    private final UserService userService;
-    private Long userId;
+  private final TaskService taskService;
+  private final UserService userService;
+//  private final
+  private Long userId;
 
-    @Autowired
-    public HelpDeskController(TaskService taskService, UserService userService) {
-        this.taskService = taskService;
-        this.userService = userService;
-    }
+  @Autowired
+  public HelpDeskController(TaskService taskService, UserService userService) {
+    this.taskService = taskService;
+    this.userService = userService;
+  }
 
-    @ModelAttribute("taskDto")
-    public TaskDto taskDto() {
-        return new TaskDto();
-    }
+  @ModelAttribute("taskDto")
+  public TaskDto taskDto() {
+    return new TaskDto();
+  }
 
-    @GetMapping(path = "/HelpDesk")
-    public String showHelpDesk(Model model, HttpSession httpSession) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String systemUserEmail = user.getUsername();
-        model.addAttribute("systemUsername", systemUserEmail);
-        SystemUser systemUser = userService.findByEmail(systemUserEmail);
+  @GetMapping(path = "/HelpDesk")
+  public String showHelpDesk(Model model, HttpSession httpSession) {
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String systemUserEmail = user.getUsername();
+    model.addAttribute("systemUsername", systemUserEmail);
+    SystemUser systemUser = userService.findByEmail(systemUserEmail);
 
-        userId = systemUser.getId();
-        List<TaskDto> allTasks = taskService.findBySystemUserId(userId);
-        model.addAttribute("taskDtoList", allTasks);
+    userId = systemUser.getId();
+    List<TaskDto> allTasks = taskService.findBySystemUserId(userId);
+    model.addAttribute("taskDtoList", allTasks);
 
-        httpSession.setAttribute("httpUserId", systemUser.getId());
-        httpSession.setAttribute("httpBranch", systemUser.getBranch());
-        httpSession.setAttribute("httpSubdivision", systemUser.getSubdivision());
-        httpSession.setAttribute("httpEmail", systemUser.getEmail());
-        Collection<GrantedAuthority> priveleges = user.getAuthorities();
-        if (priveleges.iterator().hasNext()) {
-            httpSession.setAttribute("httpUserAuthority", priveleges.iterator().next().getAuthority().toString());
-            model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());
+    httpSession.setAttribute("httpUserId", systemUser.getId());
+    httpSession.setAttribute("httpBranch", systemUser.getBranch());
+    httpSession.setAttribute("httpSubdivision", systemUser.getSubdivision());
+    httpSession.setAttribute("httpEmail", systemUser.getEmail());
+    Collection<GrantedAuthority> priveleges = user.getAuthorities();
+    if (priveleges.iterator().hasNext()) {
+      httpSession.setAttribute("httpUserAuthority", priveleges.iterator().next().getAuthority().toString());
+      model.addAttribute("userAuthority", priveleges.iterator().next().getAuthority().toString());
 //            model.addAttribute("userAuthority", httpSession.getAttribute("httpUserAuthority"));
-        }
-        return "HelpDesk";
     }
+    return "HelpDesk";
+  }
 
-    @PostMapping(path = "/HelpDesk")
-    public String taskDto(TaskDto taskDtoFromView, Model model, HttpSession httpSession) {
-        taskDtoFromView.setSystemUser((Long) httpSession.getAttribute("httpUserId"));
-        taskService.saveTask(taskDtoFromView);
-        model.addAttribute("systemUsername", httpSession.getAttribute("httpEmail"));
-        model.addAttribute("userAuthority", httpSession.getAttribute("httpUserAuthority"));
-        return "redirect:/HelpDesk";
-    }
+  @PostMapping(path = "/HelpDesk")
+  public String taskDto(TaskDto taskDtoFromView, Model model, HttpSession httpSession) {
+    taskDtoFromView.setSystemUser((Long) httpSession.getAttribute("httpUserId"));
+    taskService.saveTask(taskDtoFromView);
+    model.addAttribute("systemUsername", httpSession.getAttribute("httpEmail"));
+    model.addAttribute("userAuthority", httpSession.getAttribute("httpUserAuthority"));
+    return "redirect:/HelpDesk";
+  }
 }

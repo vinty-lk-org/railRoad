@@ -21,47 +21,49 @@ import java.util.List;
 @Controller
 public class RegistrationController {
 
-    private final UserService userService;
-    private final BranchRepository branchRepository;
-    private final SubdivisionRepository subdivisionRepository;
+  private final UserService userService;
+  private final BranchRepository branchRepository;
+  private final SubdivisionRepository subdivisionRepository;
 
-    @Autowired
-    public RegistrationController(UserService userService, BranchRepository branchRepository, SubdivisionRepository subdivisionRepository) {
-        this.userService = userService;
-        this.branchRepository = branchRepository;
-        this.subdivisionRepository = subdivisionRepository;
-    }
+  @Autowired
+  public RegistrationController(UserService userService, BranchRepository branchRepository, SubdivisionRepository subdivisionRepository) {
+    this.userService = userService;
+    this.branchRepository = branchRepository;
+    this.subdivisionRepository = subdivisionRepository;
+  }
 
-    @ModelAttribute("systemUsersDto")
-    public SystemUserDto systemUsersDto() {
-        return new SystemUserDto();
-    }
-    @ModelAttribute("branches")
-    public List<Branch> branch() {
-        return branchRepository.findAll();
-    }
-    @ModelAttribute("subdivisions")
-    public List<Subdivision> subdivisions() {
-        return subdivisionRepository.findAll();
-    }
+  @ModelAttribute("systemUsersDto")
+  public SystemUserDto systemUsersDto() {
+    return new SystemUserDto();
+  }
+
+  @ModelAttribute("branches")
+  public List<Branch> branch() {
+    return branchRepository.findAll();
+  }
+
+  @ModelAttribute("subdivisions")
+  public List<Subdivision> subdivisions() {
+    return subdivisionRepository.findAll();
+  }
 
 
-    @GetMapping(path = "/registration")
-    public String showRegistrationForm() {
-        return "Registration";
-    }
+  @GetMapping(path = "/registration")
+  public String showRegistrationForm() {
+    return "Registration";
+  }
 
-    @PostMapping(path = "/registration")
-    public String tempSystemUsersDto(SystemUserDto systemUsersDto, Model model) {
-        SystemUserDto systemUserDtoForDB = new SystemUserDto();
-        systemUserDtoForDB.setNameUser(systemUsersDto.getNameUser());
-        systemUserDtoForDB.setFamilyUser(systemUsersDto.getFamilyUser());
-        systemUserDtoForDB.setEmail(systemUsersDto.getEmail());
-        systemUserDtoForDB.setPasswordUser(systemUsersDto.getPasswordUser());
-        systemUserDtoForDB.setPrivilegeId(1L);
-        systemUserDtoForDB.setBranchId(systemUsersDto.getBranchId());
-        systemUserDtoForDB.setSubdivisionId(systemUsersDto.getSubdivisionId());
-        userService.saveUser(systemUserDtoForDB);
-        return "/Registration";
-    }
+  @PostMapping(path = "/registration")
+  public String tempSystemUsersDto(SystemUserDto systemUsersDto, Model model) {
+    SystemUserDto systemUserDtoForDB = new SystemUserDto();
+    systemUserDtoForDB.setNameUser(systemUsersDto.getNameUser());
+    systemUserDtoForDB.setFamilyUser(systemUsersDto.getFamilyUser());
+    systemUserDtoForDB.setEmail(systemUsersDto.getEmail());
+    systemUserDtoForDB.setPasswordUser(systemUsersDto.getPasswordUser());
+    systemUserDtoForDB.setPrivilegeId(1L);
+    systemUserDtoForDB.setBranchId(systemUsersDto.getBranchId());
+    systemUserDtoForDB.setSubdivisionId(systemUsersDto.getSubdivisionId());
+    userService.saveUser(systemUserDtoForDB);
+    return "/Registration";
+  }
 }
