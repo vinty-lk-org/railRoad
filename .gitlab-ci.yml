@@ -4,7 +4,7 @@ services:
 - postgres:latest
 
 variables:
-  POSTGRES_DB: Help_desk
+  POSTGRES_DB: help_desk_dd
   POSTGRES_USER: root
   POSTGRES_PASSWORD: "root"
   POSTGRES_HOST: postgres
