@@ -7,9 +7,9 @@ variables:
   POSTGRES_DB: help_desk_dd
   POSTGRES_USER: root
   POSTGRES_PASSWORD: "root"
-#  POSTGRES_HOST: postgres
+  POSTGRES_HOST: postgres
 #  DATABASE_URL: postgres://runner@localhost:5432/help_desk_dd
-  DATABASE_HOST: postgres://runner@localhost:5432/help_desk_dd
+
 
 before_script:
 # Install PG client & import schema info
