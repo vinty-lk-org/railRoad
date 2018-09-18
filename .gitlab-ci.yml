@@ -24,7 +24,7 @@ build:
     paths:
     - /builds/Vinty/help_desk/web/target/web.war
   script:
-  - mvn package -DskipTests=true
+  - mvn package
 
 deploy_dropbox:
   stage: deploy
