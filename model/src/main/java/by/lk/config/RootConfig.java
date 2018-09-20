@@ -12,8 +12,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -25,44 +23,44 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "by.lk.repository")
 public class RootConfig {
 
-    @Value("${jdbc.url}")
-    private String dbUrl;
+  @Value("${jdbc.url}")
+  private String dbUrl;
 
-    @Value("${jdbc.driver}")
-    private String driver;
+  @Value("${jdbc.driver}")
+  private String driver;
 
-    @Value("${jdbc.username}")
-    private String username;
+  @Value("${jdbc.username}")
+  private String username;
 
-    @Value("${jdbc.password}")
-    private String password;
+  @Value("${jdbc.password}")
+  private String password;
 
-    @Value("${hibernate.dialect}")
-    private String dialect;
+  @Value("${hibernate.dialect}")
+  private String dialect;
 
-    @Value("${hibernate.show_sql}")
-    private String showSql;
+  @Value("${hibernate.show_sql}")
+  private String showSql;
 
-    @Value("${hibernate.format_sql}")
-    private String formatSql;
+  @Value("${hibernate.format_sql}")
+  private String formatSql;
 
-    @Value("${hibernate.creation_policy}")
-    private String creationPolicy;
+  @Value("${hibernate.creation_policy}")
+  private String creationPolicy;
 
-    @Value("${hibernate.connection.isolation}")
-    private String isolation_level;
+  @Value("${hibernate.connection.isolation}")
+  private String isolation_level;
 
-    @Bean
-    public DriverManagerDataSource dataSource() {
+  @Bean
+  public DriverManagerDataSource dataSource() {
 //        Locale.setDefault(Locale.ENGLISH);
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(dbUrl);
-        dataSource.setDriverClassName(driver);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        return dataSource;
-    }
-        // ORACLE
+    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setUrl(dbUrl);
+    dataSource.setDriverClassName(driver);
+    dataSource.setUsername(username);
+    dataSource.setPassword(password);
+    return dataSource;
+  }
+  // ORACLE
 //    @Bean
 //    public DataSource dataSource() {
 //        DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -73,33 +71,33 @@ public class RootConfig {
 //        return ds;
 //    }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(true);
+  @Bean
+  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    vendorAdapter.setGenerateDdl(true);
 
-        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("by.lk.entity");
-        factory.setDataSource(dataSource());
-        factory.setJpaProperties(jpaProperties());
-        return factory;
-    }
+    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+    factory.setJpaVendorAdapter(vendorAdapter);
+    factory.setPackagesToScan("by.lk.entity");
+    factory.setDataSource(dataSource());
+    factory.setJpaProperties(jpaProperties());
+    return factory;
+  }
 
-    @Bean
-    public Properties jpaProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", dialect);
-        properties.setProperty("hibernate.show_sql", showSql);
-        properties.setProperty("hibernate.format_sql", formatSql);
-        properties.setProperty("hibernate.hbm2ddl.auto", creationPolicy);
-        return properties;
-    }
+  @Bean
+  public Properties jpaProperties() {
+    Properties properties = new Properties();
+    properties.setProperty("hibernate.dialect", dialect);
+    properties.setProperty("hibernate.show_sql", showSql);
+    properties.setProperty("hibernate.format_sql", formatSql);
+    properties.setProperty("hibernate.hbm2ddl.auto", creationPolicy);
+    return properties;
+  }
 
-    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory);
-        return transactionManager;
-    }
+  @Bean
+  public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+    JpaTransactionManager transactionManager = new JpaTransactionManager();
+    transactionManager.setEntityManagerFactory(entityManagerFactory);
+    return transactionManager;
+  }
 }
