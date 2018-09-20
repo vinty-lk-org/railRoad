@@ -8,13 +8,11 @@ variables:
   POSTGRES_USER: root
   POSTGRES_PASSWORD: "root"
   POSTGRES_HOST: postgres
-#  DATABASE_URL: postgres://runner@localhost:5432/help_desk_dd
 
 before_script:
 # Install PG client & import schema info
 - apt-get update && apt-get install -y postgresql-client libpq-dev
-#- PGPASSWORD=$POSTGRES_PASSWORD psql -U $POSTGRES_USER -h $POSTGRES_HOST -d $POSTGRES_DB -f db_Postgres.sql
-- PGPASSWORD=$POSTGRES_PASSWORD psql -U $POSTGRES_USER -h -d $POSTGRES_DB -f db_Postgres.sql
+- PGPASSWORD=$POSTGRES_PASSWORD psql -U $POSTGRES_USER -h $POSTGRES_HOST -d $POSTGRES_DB -f db_Postgres.sql
 
 stages:
 - build
