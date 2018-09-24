@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/artifacts/
+.idea/checkstyle-idea.xml
+.idea/compiler.xml
+.idea/dataSources.local.xml
+.idea/workspace.xml
