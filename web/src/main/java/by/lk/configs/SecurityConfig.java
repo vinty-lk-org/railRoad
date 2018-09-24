@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-            .antMatchers("/login", "/registration", "/resources/**", "/HelpDesk")
+            .antMatchers("/login", "/registration", "/resources/**", "/railRoad")
             .permitAll()
             .antMatchers("/admin").hasAuthority("Admin")
             .anyRequest()
@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
             .loginPage("/login")
             .loginProcessingUrl("/login")
-            .defaultSuccessUrl("/HelpDesk", true)
+            .defaultSuccessUrl("/railRoad", true)
             .and()
             .logout()
             .logoutUrl("/logout")

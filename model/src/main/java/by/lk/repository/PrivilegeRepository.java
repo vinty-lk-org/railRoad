@@ -1,7 +1,6 @@
 package by.lk.repository;
 
 import by.lk.entity.Privilege;
-import by.lk.entity.Task;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

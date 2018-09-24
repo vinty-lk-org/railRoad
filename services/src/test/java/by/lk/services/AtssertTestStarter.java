@@ -5,8 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        UserServiceTest.class,
-        TaskServiceTest.class
+        UserServiceTest.class
 })
 public class AtssertTestStarter {
 }
